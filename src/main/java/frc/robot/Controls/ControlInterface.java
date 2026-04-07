@@ -23,6 +23,9 @@ public interface ControlInterface {
     boolean shootButton();
 
 
+    double climbInput();
+
+
 
 
 

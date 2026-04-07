@@ -106,6 +106,11 @@ public class TwoPersonControls implements ControlInterface {
         return secondaryController.getRightTriggerAxis() > 0.5;
     }
 
+    @Override
+    public double climbInput() {
+        return secondaryController.getRightY() * 0.75;
+    }
+
     // Helper Functions
     @Override
     public void rumble(double strength, boolean leftRumble) {

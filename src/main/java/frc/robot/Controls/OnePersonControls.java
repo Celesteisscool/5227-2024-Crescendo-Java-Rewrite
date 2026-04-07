@@ -105,6 +105,17 @@ public class OnePersonControls implements ControlInterface {
         return driverController.getRightTriggerAxis() > 0.5;
     }
 
+    @Override 
+    public double climbInput() {
+        double output = 0.0;
+        if (driverController.getPOV() == 0) {
+            output = 0.75;
+        } else if (driverController.getPOV() == 180) {
+            output = -0.75;
+        }
+        return output;
+    }
+
     // Helper Functions
     @Override
     public void rumble(double strength, boolean leftRumble) {
