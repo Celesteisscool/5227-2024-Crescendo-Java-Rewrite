@@ -75,6 +75,37 @@ public class TwoPersonControls implements ControlInterface {
             return false;
     }
 
+    // Shooter Controls
+    @Override
+    public boolean ampToggle() {
+        return secondaryController.getLeftBumperButtonPressed();
+    }
+
+    @Override
+    public boolean ampShot() {
+        return secondaryController.getAButton();
+    }
+
+    @Override
+    public boolean ampShotReleased() {
+        return secondaryController.getAButtonReleased();
+    }
+
+    @Override
+    public boolean intakeButton() {
+        return secondaryController.getLeftTriggerAxis() > 0.5;
+    }
+
+    @Override
+    public boolean outtakeButton() {
+        return secondaryController.getBButton();
+    }
+
+    @Override
+    public boolean shootButton() {
+        return secondaryController.getRightTriggerAxis() > 0.5;
+    }
+
     // Helper Functions
     @Override
     public void rumble(double strength, boolean leftRumble) {

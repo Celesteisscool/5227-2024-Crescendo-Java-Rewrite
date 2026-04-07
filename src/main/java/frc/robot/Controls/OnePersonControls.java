@@ -16,8 +16,11 @@ public class OnePersonControls implements ControlInterface {
     double forwardSlowdown = 1.0 / 3.0;
     double sidewaysSlowdown = 1.0 / 2.0;
     double rotationSlowdown = 1.0 / 3.0;
+
     private double deadzone(double input) {
-        if (Math.abs(input) < 0.1) { input = 0; }
+        if (Math.abs(input) < 0.1) {
+            input = 0;
+        }
         return input;
     }
 
@@ -34,12 +37,16 @@ public class OnePersonControls implements ControlInterface {
 
     @Override
     public double getDriveRot() {
-        return (deadzone(driverController.getRightX()) * rotationSlowdown);
+        if (getSlowMode()) {
+            return 0.0;
+        } else {
+            return (deadzone(driverController.getRightX()) * rotationSlowdown);
+        }
     }
 
     @Override
     public boolean getSlowMode() {
-        boolean slowMode = (driverController.getLeftBumperButton());
+        boolean slowMode = (driverController.getRightY() < -0.8);
         return slowMode;
     }
 
@@ -66,6 +73,36 @@ public class OnePersonControls implements ControlInterface {
                          // accidental resets
         } else
             return false;
+    }
+
+    @Override
+    public boolean ampToggle() {
+        return driverController.getLeftBumperButtonPressed();
+    }
+
+    @Override
+    public boolean ampShot() {
+        return driverController.getAButton();
+    }
+
+    @Override
+    public boolean ampShotReleased() {
+        return driverController.getAButtonReleased();
+    }
+
+    @Override
+    public boolean intakeButton() {
+        return driverController.getLeftTriggerAxis() > 0.5;
+    }
+
+    @Override
+    public boolean outtakeButton() {
+        return driverController.getBButton();
+    }
+
+    @Override
+    public boolean shootButton() {
+        return driverController.getRightTriggerAxis() > 0.5;
     }
 
     // Helper Functions
